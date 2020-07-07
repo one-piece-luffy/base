@@ -48,11 +48,35 @@ dependencies {
 
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
-version = "0.0.1"
+version = "0.0.2"
 def siteUrl = 'https://github.com/LIHAIYI/base'    // project homepage
 def gitUrl  = 'https://github.com/LIHAIYI/base.git' // project git
 group = "com.baofu.base"
 
+
+//task sourcesJar(type: Jar) {
+//    from android.sourceSets.main.java.srcDirs
+//    classifier = 'sources'
+//
+//}
+//task javadoc(type: Javadoc) {
+//    source = android.sourceSets.main.java.srcDirs
+//    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+//    options.addStringOption('encoding', 'UTF-8')
+//    options.addStringOption('charSet', 'UTF-8')
+//
+//}
+////task javadocJar(type: Jar, dependsOn: javadoc) {
+////    classifier = 'javadoc'
+////    from javadoc.destinationDir
+//////    options.addStringOption('encoding', 'UTF-8')
+//////    options.addStringOption('charSet', 'UTF-8')
+////
+////}
+//artifacts {
+////    archives javadocJar
+//    archives sourcesJar
+//}
 
 install {
     repositories.mavenInstaller {
