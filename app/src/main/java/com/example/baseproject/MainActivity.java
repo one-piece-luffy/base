@@ -15,8 +15,8 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         mTitleView = findViewById(R.id.toolbar);
+        mTitleView.setBackgroundColor(0xffff0000);
         mTitleView.setTitle(getString(R.string.app_name));
         mTitleView.setRightButton("right");
         mTitleView.setTitleViewListener(new TitleView.BaseTitleViewListener(){
