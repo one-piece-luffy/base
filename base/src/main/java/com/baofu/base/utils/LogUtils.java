@@ -18,7 +18,6 @@ public class LogUtils {
         try {
             FileWriter fileWriter = new FileWriter(fileNew, true);
             fileWriter.write(DateUtils.stampToDate(System.currentTimeMillis(),"yyyy-MM-dd HH:mm:ss")+">>>"+str+"\n");
-            fileWriter.write(str+"\n");
             fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();

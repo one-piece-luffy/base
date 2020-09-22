@@ -47,6 +47,14 @@ public class AppUtils {
     public static void showToast(Object message) {
         BaseApplication.getInstance().showToast(message, Toast.LENGTH_SHORT, true);
     }
+    /**
+     * Toast提示
+     *
+     * @param message
+     */
+    public static void showToast(Context context,Object message) {
+        BaseApplication.getInstance().showToast(context,message, Toast.LENGTH_SHORT, true);
+    }
 
     /**
      * 根据手机的分辨率从 dp 的单位 转成为 px(像素)

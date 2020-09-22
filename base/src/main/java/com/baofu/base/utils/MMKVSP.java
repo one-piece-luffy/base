@@ -159,7 +159,7 @@ public class MMKVSP {
     }
 
 
-    private static MMKV getMMKV(Context context) {
+    public static MMKV getMMKV(Context context) {
         MMKV kv = null;
         try {
             kv = MMKV.defaultMMKV();
@@ -178,13 +178,13 @@ public class MMKVSP {
         return kv;
     }
 
-    private static int getMMKVInt(Context context, String key, int defaultValue) {
+    public static int getMMKVInt(Context context, String key, int defaultValue) {
         if (getMMKV(context) == null)
             return defaultValue;
         return getMMKV(context).decodeInt(key, defaultValue);
     }
 
-    private static String getMMKVString(Context context, String key, String defaultValue) {
+    public static String getMMKVString(Context context, String key, String defaultValue) {
         if (getMMKV(context) == null)
             return defaultValue;
         return getMMKV(context).decodeString(key, defaultValue);
@@ -196,25 +196,25 @@ public class MMKVSP {
         return getMMKV(context).decodeBool(key, defaultValue);
     }
 
-    private static float getMMKVFloat(Context context, String key, float defaultValue) {
+    public static float getMMKVFloat(Context context, String key, float defaultValue) {
         if (getMMKV(context) == null)
             return defaultValue;
         return getMMKV(context).decodeFloat(key, defaultValue);
     }
 
-    private static long getMMKVLong(Context context, String key, long defaultValue) {
+    public static long getMMKVLong(Context context, String key, long defaultValue) {
         if (getMMKV(context) == null)
             return defaultValue;
         return getMMKV(context).decodeLong(key, defaultValue);
     }
 
-    private static double getMMKVDouble(Context context, String key, double defaultValue) {
+    public static double getMMKVDouble(Context context, String key, double defaultValue) {
         if (getMMKV(context) == null)
             return defaultValue;
         return getMMKV(context).decodeDouble(key, defaultValue);
     }
 
-    private static <T extends Parcelable> T getMMKVParcelable(Context context, Class<T> cls,
+    public static <T extends Parcelable> T getMMKVParcelable(Context context, Class<T> cls,
                                                               String key) {
         if (getMMKV(context) == null)
             return null;
@@ -231,7 +231,7 @@ public class MMKVSP {
     }
 
 
-    private static <T> List<T> getMMKVList(Context context, Class<T> cls, String key) {
+    public static <T> List<T> getMMKVList(Context context, Class<T> cls, String key) {
         String str = getMMKVString(context, key, null);
 
         if (TextUtils.isEmpty(str))
@@ -244,32 +244,32 @@ public class MMKVSP {
         }
     }
 
-    private static Set<String> getMMKVSetString(Context context, String key) {
+    public static Set<String> getMMKVSetString(Context context, String key) {
         if (getMMKV(context) == null)
             return null;
         return getMMKV(context).decodeStringSet(key, null);
     }
 
-    private static List<String> getMMKVAllKey(Context context) {
+    public static List<String> getMMKVAllKey(Context context) {
         if (getMMKV(context) == null)
             return null;
         return Arrays.asList(getMMKV(context).allKeys());
     }
 
-    private static boolean putMMKVInt(Context context, String key, int value) {
+    public static boolean putMMKVInt(Context context, String key, int value) {
         if (getMMKV(context) == null)
             return false;
         return getMMKV(context).encode(key, value);
     }
 
 
-    private static boolean putMMKVBoolean(Context context, String key, boolean value) {
+    public static boolean putMMKVBoolean(Context context, String key, boolean value) {
         if (getMMKV(context) == null)
             return false;
         return getMMKV(context).encode(key, value);
     }
 
-    private static boolean putMMKVString(Context context, String key, String value) {
+    public static boolean putMMKVString(Context context, String key, String value) {
         if (getMMKV(context) == null)
             return false;
         if (value == null)
@@ -277,7 +277,7 @@ public class MMKVSP {
         return getMMKV(context).encode(key, value);
     }
 
-    private static boolean putMMKVSetString(Context context, String key, Set<String> set) {
+    public static boolean putMMKVSetString(Context context, String key, Set<String> set) {
         if (getMMKV(context) == null)
             return false;
         if (set == null)
@@ -285,25 +285,25 @@ public class MMKVSP {
         return getMMKV(context).encode(key, set);
     }
 
-    private static boolean putMMKVFloat(Context context, String key, float value) {
+    public static boolean putMMKVFloat(Context context, String key, float value) {
         if (getMMKV(context) == null)
             return false;
         return getMMKV(context).encode(key, value);
     }
 
-    private static boolean putMMKVDouble(Context context, String key, double value) {
+    public static boolean putMMKVDouble(Context context, String key, double value) {
         if (getMMKV(context) == null)
             return false;
         return getMMKV(context).encode(key, value);
     }
 
-    private static boolean putMMKVLong(Context context, String key, long value) {
+    public static boolean putMMKVLong(Context context, String key, long value) {
         if (getMMKV(context) == null)
             return false;
         return getMMKV(context).encode(key, value);
     }
 
-    private static boolean putMMKVParcelable(Context context, String key, Parcelable value) {
+    public static boolean putMMKVParcelable(Context context, String key, Parcelable value) {
         if (getMMKV(context) == null)
             return false;
         if (value == null) {
@@ -314,12 +314,12 @@ public class MMKVSP {
 //        return getMMKV(context).encode(key, value);
     }
 
-    private static void putMMKVList(Context context, String key, List list) {
+    public static void putMMKVList(Context context, String key, List list) {
         putMMKVString(context, key, JSON.toJSONString(list));
     }
 
 
-    private static void removeMMKVKey(Context context, String key) {
+    public static void removeMMKVKey(Context context, String key) {
         if (getMMKV(context) == null)
             return;
         getMMKV(context).remove(key);
