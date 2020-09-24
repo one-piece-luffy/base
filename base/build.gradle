@@ -42,13 +42,20 @@ dependencies {
     api 'com.alibaba:fastjson:1.1.70.android'
     api 'com.alibaba:fastjson:1.2.55'
 
+    api "android.arch.lifecycle:extensions:1.1.0"
+// alternatively, just ViewModel
+    api "android.arch.lifecycle:viewmodel:1.1.0"
+// alternatively, just LiveData
+    api "android.arch.lifecycle:livedata:1.1.0"
+    api 'com.android.support:multidex:1.0.3'
+
 
 }
 
 
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
-version = "0.0.5"
+version = "0.0.8"
 def siteUrl = 'https://github.com/LIHAIYI/base'    // project homepage
 def gitUrl  = 'https://github.com/LIHAIYI/base.git' // project git
 group = "com.baofu.base"
