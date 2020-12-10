@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.util.SparseArray;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -57,6 +58,34 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     public void onPermissionsResult(int requestCode, boolean permissionGranted) {
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        boolean granted = true;
+        if (grantResults != null && grantResults.length > 0) {
+            for (int i = 0; i < grantResults.length; i++) {
+                if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                    granted = false;
+                    break;
+                }
+            }
+        } else {
+            granted = false;
+        }
+
+        if (granted) {
+            onPermissionsResult(requestCode, true);
+
+        } else {
+            // permission denied, boo! Disable the
+            // functionality that depends on this permission.
+            onPermissionsResult(requestCode, false);
+        }
 
     }
 }
