@@ -83,7 +83,7 @@ public class DateUtils {
 
         int year1 = cal1.get(Calendar.YEAR);
         int year2 = cal2.get(Calendar.YEAR);
-        if(year1 != year2)   //同一年
+        if(year1 != year2)    //不同年
         {
             int timeDistance = 0 ;
             for(int i = year1 ; i < year2 ; i ++)
@@ -100,8 +100,8 @@ public class DateUtils {
 
             return timeDistance + (day2-day1) ;
         }
-        else    //不同年
-        {
+        else
+        {//同一年
             System.out.println("判断day2 - day1 : " + (day2-day1));
             return day2-day1;
         }
