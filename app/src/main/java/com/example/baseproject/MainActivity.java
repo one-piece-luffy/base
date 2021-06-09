@@ -4,9 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.baofu.base.BaseActivity;
-import com.baofu.base.utils.AppUtils;
-import com.baofu.base.utils.MMKVSP;
+import com.baofu.base.utils.CommonUtils;
 import com.baofu.base.view.TitleView;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,18 +21,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTitleClicked() {
                 super.onTitleClicked();
-                AppUtils.showToast("title");
+                CommonUtils.showToast("title");
             }
 
             @Override
             public void onTitleMoreClick() {
                 super.onTitleMoreClick();
-                AppUtils.showToast("more");
+                CommonUtils.showToast("more");
             }
 
             @Override
             public void onRightClicked() {
-                AppUtils.showToast("right");
+                CommonUtils.showToast("right");
             }
         });
     }
