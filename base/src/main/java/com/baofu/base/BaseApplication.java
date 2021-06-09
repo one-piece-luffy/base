@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import androidx.multidex.MultiDexApplication;
 
-import com.baofu.base.utils.AppUtils;
+import com.baofu.base.utils.CommonUtils;
 import com.baofu.base.utils.CrashHandler;
 import com.tencent.mmkv.MMKV;
 
@@ -28,10 +28,8 @@ public class BaseApplication extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
         mInstance = this;
-        if(AppUtils.isMainProcess(this)){
+        if(CommonUtils.isMainProcess(this)){
             MMKV.initialize(this);
-            CrashHandler.getInstance().init(this);
-
         }
     }
     public void showToast(Context context,Object message, int duration, boolean useSystemView) {

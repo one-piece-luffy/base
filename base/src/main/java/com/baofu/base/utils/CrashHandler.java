@@ -37,7 +37,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler
     public static final String TAG = "CrashHandler";
 
 //    public static final String LOG_FILE_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/logcat.txt";
-    public static final String LOG_FILE_PATH = AppUtils.getDownloadPath(BaseApplication.getInstance()) + "/logcat.txt";
+    public static final String LOG_FILE_PATH = CommonUtils.getDownloadPath(BaseApplication.getInstance()) + "/logcat.txt";
 
     //系统默认的UncaughtException处理类
     private Thread.UncaughtExceptionHandler mDefaultHandler;

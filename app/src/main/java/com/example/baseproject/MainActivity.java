@@ -9,7 +9,7 @@ import com.baofu.base.utils.AppUtils;
 import com.baofu.base.utils.MMKVSP;
 import com.baofu.base.view.TitleView;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends AppCompatActivity {
     TitleView mTitleView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -19,7 +19,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.baofu.base.utils.AppUtils;
+import com.baofu.base.utils.CommonUtils;
 
 
 /**
@@ -193,7 +193,7 @@ public class BaseTitleView extends FrameLayout {
     private void initBottomLine() {
         mBottomLine = new ImageView(getContext());
         LayoutParams layoutParams = new LayoutParams(
-                LayoutParams.MATCH_PARENT, AppUtils.dip2px(getContext(), 0.5f));
+                LayoutParams.MATCH_PARENT, CommonUtils.dip2px(getContext(), 0.5f));
         layoutParams.gravity = Gravity.BOTTOM;
         mBottomLine.setLayoutParams(layoutParams);
         mBottomLine.setBackgroundColor(0xffeff1f4);
@@ -263,7 +263,7 @@ public class BaseTitleView extends FrameLayout {
         mLeftLayout.removeAllViews();
         if (!TextUtils.isEmpty(text)) {
             Button btn = new Button(getContext());
-            btn.setMaxWidth(AppUtils.dip2px(getContext(),DEFALUT_MAX_WIDTH_DP));
+            btn.setMaxWidth(CommonUtils.dip2px(getContext(),DEFALUT_MAX_WIDTH_DP));
             setLeftViewAttr(btn, true);
             btn.setText(text);
             btn.setMaxLines(1);
@@ -326,7 +326,7 @@ public class BaseTitleView extends FrameLayout {
         mRightLayout.removeAllViews();
         if (!TextUtils.isEmpty(text)) {
             Button btn = new Button(getContext());
-            btn.setMaxWidth(AppUtils.dip2px(getContext(),DEFALUT_MAX_WIDTH_DP));
+            btn.setMaxWidth(CommonUtils.dip2px(getContext(),DEFALUT_MAX_WIDTH_DP));
             setLeftViewAttr(btn, true);
             btn.setText(text);
             btn.setMaxLines(1);

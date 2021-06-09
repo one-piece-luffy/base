@@ -16,7 +16,7 @@ public class ShareUtils {
     public static void shareSystemFile(Context context, String appId,String filePath) {
         File file = new File(filePath);
         if (!file.exists()) {
-            AppUtils.showToast("file dont exists");
+            CommonUtils.showToast("file dont exists");
             return;
         }
 
@@ -46,7 +46,7 @@ public class ShareUtils {
     public static void shareQqFile(Context context,String appid,String filePath){
         File file = new File(filePath);
         if (!file.exists()) {
-            AppUtils.showToast("file dont exists");
+            CommonUtils.showToast("file dont exists");
             return;
         }
 
