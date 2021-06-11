@@ -3,9 +3,14 @@ package com.example.baseproject;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.baofu.base.utils.CommonUtils;
+import com.baofu.base.utils.MMKVSP;
 import com.baofu.base.view.TitleView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     TitleView mTitleView;
@@ -35,5 +40,16 @@ public class MainActivity extends AppCompatActivity {
                 CommonUtils.showToast("right");
             }
         });
+        UserBean bean=new UserBean();
+        bean.name="asdf";
+        UserBean.UserFav fav=new UserBean.UserFav();
+        fav.fruit="apple";
+        bean.fav=fav;
+        Map<String,UserBean> map=new HashMap<>();
+        map.put("a",bean);
+        MMKVSP.putMap(this,"key",map);
+
+        Map<String,UserBean> value=MMKVSP.getMap(this,"key");
+        Log.e("asdf",value.get("a").name);
     }
 }
