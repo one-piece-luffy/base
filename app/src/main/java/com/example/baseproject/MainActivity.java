@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.baofu.base.utils.CommonUtils;
 import com.baofu.base.utils.MMKVSP;
+import com.baofu.base.view.EmptyView;
 import com.baofu.base.view.TitleView;
 
 import java.util.HashMap;
@@ -14,6 +15,7 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     TitleView mTitleView;
+    EmptyView emptyView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,5 +53,12 @@ public class MainActivity extends AppCompatActivity {
 
         Map<String,UserBean> value=MMKVSP.getMap(this,"key");
         Log.e("asdf",value.get("a").name);
+        emptyView.showLoading();
+        emptyView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                emptyView.hide();
+            }
+        },1000);
     }
 }
