@@ -42,17 +42,8 @@ public class MainActivity extends AppCompatActivity {
                 CommonUtils.showToast("right");
             }
         });
-        UserBean bean=new UserBean();
-        bean.name="asdf";
-        UserBean.UserFav fav=new UserBean.UserFav();
-        fav.fruit="apple";
-        bean.fav=fav;
-        Map<String,UserBean> map=new HashMap<>();
-        map.put("a",bean);
-        MMKVSP.putMap(this,"key",map);
 
-        Map<String,UserBean> value=MMKVSP.getMap(this,"key");
-        Log.e("asdf",value.get("a").name);
+        emptyView=findViewById(R.id.emptyview);
         emptyView.showLoading();
         emptyView.postDelayed(new Runnable() {
             @Override
