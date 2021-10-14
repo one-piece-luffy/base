@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.net.http.SslError;
 import android.os.Build;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -136,6 +137,27 @@ public class AppWebView extends FrameLayout {
                 return;
             if (mWebViewClientListener != null) {
                 mWebViewClientListener.onProgressChanged(view, newProgress);
+            }
+            if(newProgress==100){
+//                if (Apputils.isDebug()) {
+//                    Handler handler=new Handler();
+//                    handler.postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            String html =
+//                                    "javascript:var script = document.createElement('script');script.src = 'https://cdn.bootcss.com/vConsole/3.2.0/vconsole.min.js';document.body.appendChild(script);";
+//                            mWebView.loadUrl(html);
+//                        }
+//                    },4000);
+//                    handler.postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            String html =
+//                                    "javascript: new VConsole();";
+//                            mWebView.loadUrl(html);
+//                        }
+//                    },6000);
+//                }
             }
 
 
