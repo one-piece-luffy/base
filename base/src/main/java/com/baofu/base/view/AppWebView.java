@@ -3,7 +3,6 @@ package com.baofu.base.view;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.net.http.SslError;
@@ -37,7 +36,7 @@ import com.baofu.base.R;
 
 public class AppWebView extends FrameLayout {
 
-    Context mContext;
+    Activity mActivity;
 
     WebView mWebView;
 
@@ -47,32 +46,32 @@ public class AppWebView extends FrameLayout {
 
     boolean mIsActivity;
 
-    public AppWebView(Context context) {
-        super(context);
-        init(context);
+    public AppWebView(Activity activity) {
+        super(activity);
+        init(activity);
     }
 
-    public AppWebView(Context context, boolean isActivity) {
-        super(context);
+    public AppWebView(Activity activity, boolean isActivity) {
+        super(activity);
         mIsActivity = isActivity;
-        init(context);
+        init(activity);
     }
 
-    public AppWebView(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-        init(context);
+    public AppWebView(Activity activity, @Nullable AttributeSet attrs) {
+        super(activity, attrs);
+        init(activity);
     }
 
-    public AppWebView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        init(context);
+    public AppWebView(Activity activity, @Nullable AttributeSet attrs, int defStyleAttr) {
+        super(activity, attrs, defStyleAttr);
+        init(activity);
     }
 
-    private void init(Context activity) {
-        mContext = activity;
+    private void init(Activity activity) {
+        mActivity = activity;
 
         mWebView = (WebView) LayoutInflater
-                .from(mIsActivity ? mContext : mContext.getApplicationContext())
+                .from(mIsActivity ? mActivity : mActivity.getApplicationContext())
                 .inflate(R.layout.view_webview, null);
         addView(mWebView);
         initSetting();
@@ -103,7 +102,7 @@ public class AppWebView extends FrameLayout {
 
         // 用于H5识别来源，是否来自客户端还是网页
 //            settings.setUserAgentString(
-//                    settings.getUserAgentString() + AppUtils.getUserAgentSuffix(mContext));
+//                    settings.getUserAgentString() + AppUtils.getUserAgentSuffix(mactivity));
         // 设置加载进来的页面自适应手机屏幕
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
 
@@ -116,7 +115,7 @@ public class AppWebView extends FrameLayout {
 
         mWebView.setWebContentsDebuggingEnabled(true);
 
-        // 屏蔽某些手机长按事件,复制奔溃(另一种代替方法初始化webview传getApplicationContext()替换成NewsDetailActivity.this)
+        // 屏蔽某些手机长按事件,复制奔溃(另一种代替方法初始化webview传getApplicationactivity()替换成NewsDetailActivity.this)
         mWebView.setOnLongClickListener(new OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -250,10 +249,10 @@ public class AppWebView extends FrameLayout {
 
     private boolean isActivityRunning() {
 
-        if (mWebView == null || mContext == null)
+        if (mWebView == null || mActivity == null)
             return false;
-//        if (mContext instanceof Activity) {
-//            if (((Activity) mContext).isDestroyed())
+//        if (mactivity instanceof Activity) {
+//            if (((Activity) mactivity).isDestroyed())
 //                return false;
 //        }
         return true;
@@ -335,19 +334,18 @@ public class AppWebView extends FrameLayout {
     public void sslHandle(final WebView view, final SslErrorHandler handler, final SslError error) {
 
 
-        if (view == null || view.getContext() == null) {
+        if (view == null || mActivity == null) {
             return;
         }
         try {
-            Activity activity = (Activity) view.getContext();
-            if (activity.isFinishing()) {
+            if (mActivity.isFinishing()) {
                 return;
             }
         } catch (Exception e) {
 
         }
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+        final AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
         AlertDialog dialog = null;
         String message = "SSL Certificate error.";
         switch (error.getPrimaryError()) {
@@ -371,7 +369,7 @@ public class AppWebView extends FrameLayout {
         builder.setPositiveButton("continue", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (view == null || view.getContext() == null) {
+                if (view == null || mActivity == null) {
                     return;
                 }
                 if (handler != null) {
@@ -386,7 +384,7 @@ public class AppWebView extends FrameLayout {
         builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (view == null || view.getContext() == null) {
+                if (view == null || mActivity == null) {
                     return;
                 }
                 if (handler != null) {
