@@ -23,7 +23,7 @@ import com.baofu.base.utils.CommonUtils;
 
 
 /**
- * Created by lihaiyi on 2018/7/6.
+ * Created by yi on 2018/7/6.
  */
 
 public class BaseTitleView extends FrameLayout {

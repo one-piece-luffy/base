@@ -31,7 +31,7 @@ import com.baofu.base.R;
 
 
 /**
- * Created by lihaiyi on 2018/5/22.
+ * Created by yi on 2018/5/22.
  */
 
 public class AppWebView extends FrameLayout {
