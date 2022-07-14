@@ -20,11 +20,11 @@ public class MainActivity extends AppCompatActivity {
                 emptyView.showNothingData(0,"no data");
             }
         },1000);
-        emptyView.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                emptyView.hide();
-            }
-        },3000);
+//        emptyView.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                emptyView.hide();
+//            }
+//        },3000);
     }
 }

@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -61,7 +62,7 @@ public class EmptyView extends LinearLayout {
 
         //获取自定义属性和默认值
         textColor = mTypedArray.getColor(R.styleable.emptyview_textColor, Color.RED);
-        textSize = mTypedArray.getDimension(R.styleable.emptyview_textSize, DeviceUtils.dip2px(context,14));
+        textSize = mTypedArray.getDimension(R.styleable.emptyview_textSize, 0);
 
         View view= LayoutInflater.from(context).inflate(R.layout.view_list_empty,null);
         LayoutParams params=new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT);
@@ -71,7 +72,10 @@ public class EmptyView extends LinearLayout {
         mErrorTextView=  findViewById(R.id.error_message);
         mLoadingLayout=  findViewById(R.id.loading_layout);
         mErrorTextView.setTextColor(textColor);
-        mErrorTextView.setTextSize(textSize);
+        if(textSize>0){
+            mErrorTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+        }
+
         setVisibility(View.GONE);
     }
 
