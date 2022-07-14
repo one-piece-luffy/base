@@ -2,28 +2,32 @@
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
+//        maven { url 'https://maven.aliyun.com/repository/public' }
+//        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url "https://jitpack.io" } //jitpack上传
+
+
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:4.0.0"
-        //bintray 插件
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.0'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+        classpath "com.android.tools.build:gradle:4.2.2"
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+//        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'    //jitpack上传
+
     }
 }
 
 allprojects {
     repositories {
+        /**
+         * bintray上传
+         */
         google()
-        jcenter()
-        maven { url "https://jitpack.io" }
-        maven { url 'https://maven.aliyun.com/repository/public' }
-        maven { url 'https://maven.aliyun.com/repository/google' }
+        mavenCentral()
+        maven { url "https://jitpack.io" }//jitpack上传
     }
+
 }
-
-
 
 task clean(type: Delete) {
     delete rootProject.buildDir

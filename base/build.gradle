@@ -1,15 +1,9 @@
 apply plugin: 'com.android.library'
-/**
- * 上传git start====
- */
+apply plugin: 'com.github.dcendents.android-maven' //jitpack上传
+group='com.github.one-piece-luffy'// jitpack上传 : 这里对应自己的github名称就可以了
 
-apply plugin: 'com.github.dcendents.android-maven'
-group='com.github.one-piece-luffy' // jitpack上传 : 这里对应自己的github名称就可以了
-/**
- * 上传git end====
- */
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
     buildToolsVersion "30.0.3"
 
     defaultConfig {
@@ -27,9 +21,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-    }
-    lintOptions {
-        abortOnError false
     }
 
 }
@@ -59,5 +50,4 @@ dependencies {
 
 
 }
-
 
