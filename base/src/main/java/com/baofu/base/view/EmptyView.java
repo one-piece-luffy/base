@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.baofu.base.R;
 import com.baofu.base.utils.CommonUtils;
+import com.baofu.base.utils.DeviceUtils;
 
 
 public class EmptyView extends LinearLayout {
@@ -60,7 +61,7 @@ public class EmptyView extends LinearLayout {
 
         //获取自定义属性和默认值
         textColor = mTypedArray.getColor(R.styleable.emptyview_textColor, Color.RED);
-        textSize = mTypedArray.getDimension(R.styleable.emptyview_textSize, CommonUtils.dip2px(context,14));
+        textSize = mTypedArray.getDimension(R.styleable.emptyview_textSize, DeviceUtils.dip2px(context,14));
 
         View view= LayoutInflater.from(context).inflate(R.layout.view_list_empty,null);
         LayoutParams params=new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT);
