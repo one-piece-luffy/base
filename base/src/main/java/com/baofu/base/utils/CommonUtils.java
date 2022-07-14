@@ -1,10 +1,18 @@
 package com.baofu.base.utils;
 
+import static android.content.Context.CLIPBOARD_SERVICE;
+
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.http.SslError;
 import android.os.Environment;
 import android.os.Looper;
@@ -64,26 +72,7 @@ public class CommonUtils {
         BaseApplication.getInstance().showToast(context,message, Toast.LENGTH_SHORT, true);
     }
 
-    /**
-     * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
-     */
-    public static int dip2px(Context context, float dpValue) {
-        if (context == null)
-            context = BaseApplication.getInstance();
-        final float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (dpValue * scale + 0.5f);
-    }
 
-    public static int getStatusBarHeight(Context context) {
-        final Resources resources = context.getResources();
-        final int resourceId = resources.getIdentifier("status_bar_height", "dimen", "android");
-        int height;
-        if (resourceId > 0)
-            height = resources.getDimensionPixelSize(resourceId);
-        else
-            height = (int) Math.ceil(25 * resources.getDisplayMetrics().density);
-        return height;
-    }
 
     public static String getDownloadPath(Context context) {
 
@@ -232,27 +221,121 @@ public class CommonUtils {
     }
 
     /**
-     * 获取屏幕宽度
-     * @param context
-     * @return
+     * 获取app versionCode
      */
-    public static int getScreenWidth(Context context) {
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        int width = wm.getDefaultDisplay().getWidth();
-        return width;
+    public static int getAppVersionCode(Context ctx) {
+        int localVersion = 0;
+        try {
+            PackageInfo packageInfo = ctx.getApplicationContext()
+                    .getPackageManager()
+                    .getPackageInfo(ctx.getPackageName(), 0);
+            localVersion = packageInfo.versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return localVersion;
     }
+
     /**
-     * 获取屏幕高度
+     * 获取获取app versionName
+     */
+    public static String getAppVersionName(Context ctx) {
+        String localVersion = "";
+        try {
+            PackageInfo packageInfo = ctx.getApplicationContext()
+                    .getPackageManager()
+                    .getPackageInfo(ctx.getPackageName(), 0);
+            localVersion = packageInfo.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return localVersion;
+    }
+
+    /**
+     * 是否安装了应用
+     * android11需要在Manifest.xml额外添加
+     *     <queries>
+     *         <package android:name="com.whatsapp" />
+     *         <package android:name="com.instagram.android" />
+     *     </queries>
+     * @param context
+     * @param packageName 应用包名
+     *
+     * @return
+     */
+    public static boolean isInstalled(Context context, String packageName) {
+        boolean hasInstalled = false;
+        try {
+            PackageManager pm = context.getPackageManager();
+            List<PackageInfo> list = pm.getInstalledPackages(0);
+            for (PackageInfo p : list) {
+//            Trace.e("APPUTIL", "-==" + p.packageName);
+                if (packageName != null && packageName.equals(p.packageName)) {
+                    hasInstalled = true;
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return hasInstalled;
+    }
+
+    /**
+     * 判断网络是否可用
      * @param context
      * @return
      */
-    public static int getScreenHeight(Activity context) {
-        DisplayMetrics metric = new DisplayMetrics();
-        context.getWindowManager().getDefaultDisplay().getMetrics(metric);
-        return metric.heightPixels;
+    public static boolean isNetworkAvailable(Context context) {
+        if(context==null)
+            return false;
+        try {
+            ConnectivityManager manager = (ConnectivityManager) context
+                    .getApplicationContext().getSystemService(
+                            Context.CONNECTIVITY_SERVICE);
+            if (manager == null) {
+                return false;
+            }
+            NetworkInfo networkInfo = manager.getActiveNetworkInfo();
+            return networkInfo != null && networkInfo.isConnected();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
     }
 
+    /**
+     * 获取粘贴版数据
+     */
+    public static String getClipboardContent(Context context) {
+        if (context == null)
+            return null;
+        ClipboardManager cm = (ClipboardManager) context.getSystemService(CLIPBOARD_SERVICE);
+        if (cm == null)
+            return null;
+        String content = null;
+        try {
+            //放在onActivityResumed里面调用。 有的手机会出现getPrimaryClip()为null ，此时需要延迟调用。
+            ClipData data = cm.getPrimaryClip();
+            if (data != null) {
+                ClipData.Item item = data.getItemAt(0);
+                content = item.getText().toString();
+            }
+        } catch (Exception e) {
+//            e.printStackTrace();
+        }
+        return content;
+    }
 
-
+    /**
+     * 设置粘贴板数据
+     */
+    public static void setClipboardContent(Context context,String text){
+        ClipboardManager cm = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clipData = ClipData.newPlainText("main", text);
+        cm.setPrimaryClip(clipData);
+    }
 
 }

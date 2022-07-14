@@ -31,6 +31,7 @@ public class BaseApplication extends MultiDexApplication {
 //        if(CommonUtils.isMainProcess(this)){
 //            MMKV.initialize(this);
 //        }
+
     }
     public void showToast(Context context,Object message, int duration, boolean useSystemView) {
         if (message == null || TextUtils.isEmpty(message.toString())) {

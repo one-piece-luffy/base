@@ -1,6 +1,8 @@
 package com.baofu.base.view;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -10,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.baofu.base.R;
+import com.baofu.base.utils.CommonUtils;
 
 
 public class EmptyView extends LinearLayout {
@@ -25,15 +28,23 @@ public class EmptyView extends LinearLayout {
 
     private View mLoadingLayout;
 
+    /**
+     * 字体颜色
+     */
+    private int textColor;
+    /**
+     * 字体大小
+     */
+    private float textSize;
 
     public EmptyView(Context context) {
         super(context);
-        init(context);
+        init(context,null);
     }
 
     public EmptyView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context);
+        init(context,attrs);
     }
 
     protected void onFinishInflate() {
@@ -42,7 +53,15 @@ public class EmptyView extends LinearLayout {
         super.onFinishInflate();
     }
 
-    private void init(Context context){
+    private void init(Context context,AttributeSet attrs){
+
+        TypedArray mTypedArray = context.obtainStyledAttributes(attrs,
+                R.styleable.emptyview);
+
+        //获取自定义属性和默认值
+        textColor = mTypedArray.getColor(R.styleable.emptyview_textColor, Color.RED);
+        textSize = mTypedArray.getDimension(R.styleable.emptyview_textSize, CommonUtils.dip2px(context,14));
+
         View view= LayoutInflater.from(context).inflate(R.layout.view_list_empty,null);
         LayoutParams params=new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT);
         addView(view,params);
@@ -50,6 +69,8 @@ public class EmptyView extends LinearLayout {
         mErrorImage=  findViewById(R.id.error_image);
         mErrorTextView=  findViewById(R.id.error_message);
         mLoadingLayout=  findViewById(R.id.loading_layout);
+        mErrorTextView.setTextColor(textColor);
+        mErrorTextView.setTextSize(textSize);
         setVisibility(View.GONE);
     }
 
