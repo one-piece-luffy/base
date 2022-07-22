@@ -1,5 +1,6 @@
 package com.baofu.base;
 
+import android.app.Application;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -14,7 +15,7 @@ import com.baofu.base.utils.CrashHandler;
 import com.tencent.mmkv.MMKV;
 
 
-public class BaseApplication extends MultiDexApplication {
+public class BaseApplication extends Application {
 
     private static BaseApplication mInstance;
     private  Toast mToast;
