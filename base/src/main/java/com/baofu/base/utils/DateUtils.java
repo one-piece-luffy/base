@@ -16,7 +16,7 @@ public class DateUtils {
      */
     public static String stampToDate(long time,String formatString){
         SimpleDateFormat sdf=new SimpleDateFormat(formatString);
-        String sd = sdf.format(new Date(Long.parseLong(String.valueOf(time))));
+        String sd = sdf.format(new Date(time));
         return sd;
     }
 
