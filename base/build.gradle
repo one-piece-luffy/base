@@ -37,7 +37,6 @@ dependencies {
 
 
     implementation 'com.android.support:multidex:1.0.3'
-    api 'com.tencent:mmkv-static:1.2.10'
     api 'com.alibaba:fastjson:1.2.55'
     api 'com.alibaba:fastjson:1.2.55'
 

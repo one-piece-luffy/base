@@ -9,10 +9,6 @@ import android.widget.Toast;
 
 import androidx.multidex.MultiDexApplication;
 
-import com.baofu.base.utils.CommonUtils;
-import com.baofu.base.utils.CrashHandler;
-import com.tencent.mmkv.MMKV;
-
 
 public class BaseApplication extends MultiDexApplication {
 
