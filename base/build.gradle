@@ -35,8 +35,8 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation'androidx.constraintlayout:constraintlayout:2.1.2'
 
-    api 'com.alibaba:fastjson:1.2.55'
-    api 'com.alibaba:fastjson:1.2.55'
+    api 'com.alibaba:fastjson:2.0.31'
+    api 'com.alibaba:fastjson:2.0.31'
 
     implementation "android.arch.lifecycle:extensions:1.1.1"
 // alternatively, just ViewModel
