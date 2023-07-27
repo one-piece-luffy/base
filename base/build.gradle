@@ -1,20 +1,20 @@
-apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven' //jitpack上传
-group='com.github.one-piece-luffy'// jitpack上传 : 这里对应自己的github名称就可以了
+plugins {
+//    id 'maven-publish'
+    id 'com.android.library'
+//    id 'java'
+}
 
 android {
-    compileSdkVersion 31
-    buildToolsVersion "30.0.3"
+    compileSdkVersion 33
+    buildToolsVersion '32.0.0'
+
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
-        multiDexEnabled true
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles "consumer-rules.pro"
+        minSdkVersion 22
+        targetSdkVersion 33
+
     }
+    namespace 'com.baofu.base'
 
     buildTypes {
         release {
@@ -46,3 +46,28 @@ dependencies {
 
 }
 
+apply plugin: "maven-publish"
+
+android {
+    publishing {
+        singleVariant('release') {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+
+                groupId = 'com.github.one-piece-luffy' //groupId 随便取，jitpack不会使用
+                artifactId = 'base'  //test随便取,jitpack不会使用
+                version = '2.5.18' //随便取，jitpack不会使用
+
+            }
+        }
+    }
+}
