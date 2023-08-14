@@ -83,7 +83,6 @@ public class AppWebView extends FrameLayout {
         WebSettings settings = mWebView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setDomStorageEnabled(true);
-        settings.setAppCacheEnabled(true);
         settings.setAllowFileAccess(true);
         settings.setTextZoom(100);
         settings.setJavaScriptCanOpenWindowsAutomatically(true);
