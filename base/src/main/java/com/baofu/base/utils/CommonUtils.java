@@ -333,9 +333,14 @@ public class CommonUtils {
      * 设置粘贴板数据
      */
     public static void setClipboardContent(Context context,String text){
-        ClipboardManager cm = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
-        ClipData clipData = ClipData.newPlainText("main", text);
-        cm.setPrimaryClip(clipData);
+        try {
+            ClipboardManager cm = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clipData = ClipData.newPlainText("main", text);
+            cm.setPrimaryClip(clipData);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
 }
