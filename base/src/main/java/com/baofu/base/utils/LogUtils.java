@@ -10,7 +10,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class LogUtils {
-//    public static final String LOG_FILE_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/notify";
     public static final String LOG_FILE_PATH =  CommonUtils.getDownloadPath(BaseApplication.getInstance()) + "/log";
     public static File fileNew = new File(LOG_FILE_PATH);
     public static void saveLog(String str){
