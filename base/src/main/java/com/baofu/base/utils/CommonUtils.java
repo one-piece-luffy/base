@@ -14,6 +14,7 @@ import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.http.SslError;
+import android.os.Build;
 import android.os.Environment;
 import android.os.Looper;
 import android.provider.Settings;
@@ -223,17 +224,21 @@ public class CommonUtils {
     /**
      * 获取app versionCode
      */
-    public static int getAppVersionCode(Context ctx) {
-        int localVersion = 0;
+    public static long getAppVersionCode(Context ctx) {
         try {
             PackageInfo packageInfo = ctx.getApplicationContext()
                     .getPackageManager()
                     .getPackageInfo(ctx.getPackageName(), 0);
-            localVersion = packageInfo.versionCode;
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                return packageInfo.getLongVersionCode();
+            } else {
+                return packageInfo.versionCode;
+            }
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
+            return 0;
         }
-        return localVersion;
     }
 
     /**
