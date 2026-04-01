@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'kotlin-kapt'
 android {
-    compileSdkVersion 33
-    buildToolsVersion '32.0.0'
+    compileSdk 36
+    buildToolsVersion '36.0.0'
 
     defaultConfig {
         applicationId "com.example.baseproject"
         minSdkVersion 22
-        targetSdkVersion 33
+        targetSdkVersion 36
         versionCode 1
         versionName "1.0"
 
@@ -21,15 +21,23 @@ android {
         }
     }
     namespace 'com.example.baseproject'
+//    compileSdkMinor 1
+
+    configurations.all {
+        // 强制所有 Kotlin 标准库使用同一个版本
+        resolutionStrategy.eachDependency { details ->
+            if (details.requested.group == 'org.jetbrains.kotlin' &&
+                    details.requested.name.startsWith('kotlin-stdlib')) {
+                details.useVersion '1.8.22' // 统一为你项目的新版本
+            }
+        }
+    }
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
     api  project(':base')
 //    implementation 'com.github.one-piece-luffy:base:1.6'
 }
